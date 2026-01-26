@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Test Case Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>AI Test Case Generator</h1>
+            <p>Powered by Local Ollama (Llama 3.2)</p>
+        </header>
+
+        <main>
+            <div class="input-section glass-panel">
+                <label for="code-input">Paste your Code or Describe Requirements</label>
+                <textarea id="code-input" placeholder="// Describe your User Story, Feature, or Functionality here...
+Example: 'Login Page with Email and Password. Should handle invalid emails and lock out after 3 attempts.'"
+                    spellcheck="false"></textarea>
+                <div class="actions">
+                    <button id="generate-btn" class="primary-btn">
+                        <span class="btn-text">Generate Tests</span>
+                        <div class="loader hidden"></div>
+                    </button>
+                    <span id="status-msg"></span>
+                </div>
+            </div>
+
+            <div class="output-section glass-panel hidden" id="output-container">
+                <div class="output-header">
+                    <h2>Generated Test Cases</h2>
+                    <button id="copy-btn" class="secondary-btn">Copy Code</button>
+                </div>
+                <div class="code-viewer" id="result-output">
+                    <!-- Markdown/Code will appear here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
