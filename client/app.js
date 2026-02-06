@@ -15,6 +15,8 @@ generateBtn.addEventListener('click', async () => {
         return;
     }
 
+    const format = document.getElementById('format-select').value;
+    
     // Reset UI
     startLoading();
     outputContainer.classList.add('hidden');
@@ -26,7 +28,7 @@ generateBtn.addEventListener('click', async () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ input })
+            body: JSON.stringify({ input, format })
         });
 
         const data = await response.json();

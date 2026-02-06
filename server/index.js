@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 // API Endpoint: Generate Test Cases
 app.post('/api/generate', (req, res) => {
-    const { input } = req.body;
+    const { input, format } = req.body;
 
     // 1. Validate Input
     console.log('Received request:', req.body); // DEBUG LOG
@@ -24,7 +24,7 @@ app.post('/api/generate', (req, res) => {
     }
 
     // 2. Build Prompt
-    const finalPrompt = buildPrompt(input);
+    const finalPrompt = buildPrompt(input, format);
     console.log('Prompt built. Sending to Ollama...'); // DEBUG LOG
 
     // 3. Prepare Request to Ollama

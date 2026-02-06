@@ -31,6 +31,14 @@
                 <textarea id="code-input" placeholder="// Describe your User Story, Feature, or Functionality here...
 Example: 'Login Page with Email and Password. Should handle invalid emails and lock out after 3 attempts.'"
                     spellcheck="false"></textarea>
+
+                <div class="options-row" style="margin-top: 1rem; margin-bottom: 1rem;">
+                    <label for="format-select" style="color: var(--text-secondary); font-size: 0.9rem;">Format:</label>
+                    <select id="format-select" class="styled-select">
+                        <option value="standard">Standard (Manual Steps)</option>
+                        <option value="gherkin">Gherkin (Given-When-Then)</option>
+                    </select>
+                </div>
                 <div class="actions">
                     <button id="generate-btn" class="primary-btn">
                         <span class="btn-text">Generate Tests</span>
