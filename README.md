@@ -10,6 +10,7 @@ A premium, privacy-focused tool that generates comprehensive functional test cas
 
 -   **Privacy First**: All data processing happens locally on your machine. No code leaves your system.
 -   **Functional Test Cases**: Generates detailed manual test scenarios (Positive, Negative, Edge Cases).
+-   **Multiple Formats**: Support for **Standard** (Step-by-Step) and **Gherkin** (Given-When-Then) syntax.
 -   **Modern UI**: Glassmorphism-styled interface built with Vanilla JS and CSS variables.
 -   **Real-time Generation**: Direct streaming integration with local Ollama instance.
 -   **Syntax Highlighting**: Beautifully formatted output using Highlight.js.
@@ -68,7 +69,8 @@ If using VS Code, right-click `client/index.html` and select "Open with Live Ser
 
 1.  **Describe your Feature**: In the text area, paste your user story, requirements, or function description.
     *   *Example: "A login page that requires a valid email and password. It should lock the account after 5 failed attempts."*
-2.  **Generate**: Click the **Generate Tests** button.
+2.  **Select Format**: Choose between **Standard** (for manual execution) or **Gherkin** (for BDD automated tests).
+3.  **Generate**: Click the **Generate Tests** button.
     *   *Note: The very first generation might take ~60 seconds as the model loads into memory.*
 3.  **View Results**: The AI will produce a structured list of test cases including Pre-conditions, Steps, and Expected Results.
 4.  **Copy**: Use the Copy button to grab the Markdown for your documentation (Jira, Confluence, etc.).
