@@ -1,15 +1,28 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
+const path = require('path');
 const http = require('http');
 const { buildPrompt } = require('./prompt');
 
 const app = express();
-const PORT = 3000;
-const OLLAMA_PORT = 11434;
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
+const OLLAMA_HOST = process.env.OLLAMA_HOST || 'localhost';
+const OLLAMA_PORT = process.env.OLLAMA_PORT ? parseInt(process.env.OLLAMA_PORT, 10) : 11434;
+const OLLAMA_API_KEY = process.env.OLLAMA_API_KEY || process.env.OLLAMA_KEY || null;
 
-app.use(cors());
-app.use(bodyParser.json());
+const corsOptions = {
+  origin: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.static(path.join(__dirname, '../client')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/index.html'));
+});
 
 // API Endpoint: Generate Test Cases
 app.post('/api/generate', (req, res) => {
@@ -35,7 +48,7 @@ app.post('/api/generate', (req, res) => {
     });
 
     const options = {
-        hostname: 'localhost',
+        hostname: OLLAMA_HOST,
         port: OLLAMA_PORT,
         path: '/api/generate',
         method: 'POST',
@@ -44,6 +57,10 @@ app.post('/api/generate', (req, res) => {
             'Content-Length': Buffer.byteLength(requestData)
         }
     };
+
+    if (OLLAMA_API_KEY) {
+        options.headers.Authorization = `Bearer ${OLLAMA_API_KEY}`;
+    }
 
     // 4. Send Request to Ollama
     const ollamaReq = http.request(options, (ollamaRes) => {
@@ -64,6 +81,9 @@ app.post('/api/generate', (req, res) => {
                     console.error('Error parsing Ollama response:', e);
                     res.status(500).json({ error: 'Failed to process AI response.' });
                 }
+            } else if (ollamaRes.statusCode === 401) {
+                console.error(`Ollama Unauthorized: ${data}`);
+                res.status(502).json({ error: 'Ollama returned 401 Unauthorized. Check your Ollama API key or local auth configuration.' });
             } else if (ollamaRes.statusCode === 404) {
                 res.status(500).json({ error: 'Model "llama3.2" not found. Please run "ollama pull llama3.2".' });
             } else {

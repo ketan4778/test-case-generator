@@ -7,6 +7,8 @@ const loader = generateBtn.querySelector('.loader');
 const btnText = generateBtn.querySelector('.btn-text');
 const copyBtn = document.getElementById('copy-btn');
 
+const API_URL = window.location.protocol === 'file:' ? 'http://localhost:3001' : '';
+
 generateBtn.addEventListener('click', async () => {
     const input = codeInput.value;
 
@@ -23,7 +25,7 @@ generateBtn.addEventListener('click', async () => {
     resultOutput.innerHTML = '';
 
     try {
-        const response = await fetch('http://localhost:3000/api/generate', {
+        const response = await fetch(`${API_URL}/api/generate`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

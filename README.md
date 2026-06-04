@@ -48,22 +48,32 @@ ollama pull llama3.2
 ## 🏃‍♂️ How to Run
 
 ### 1. Start the Backend Server
-This handles the API requests and prompts.
+This handles the API requests, prompts, and also serves the frontend.
 
-```bash
+If your local Ollama instance requires an API key, set `OLLAMA_API_KEY` first.
+
+**PowerShell:**
+```powershell
+$env:OLLAMA_API_KEY = "your_api_key_here"
 node server/index.js
 ```
 
-You should see: `Backend Server running on http://localhost:3000`
+**Command Prompt:**
+```cmd
+set OLLAMA_API_KEY=your_api_key_here
+node server/index.js
+```
+
+You should see: `Backend Server running on http://localhost:3001`
 
 ### 2. Open the Client
-Navigate to the `client` folder and open `index.html` in your favorite browser.
+Open your browser and go to `http://localhost:3001`.
 
-**Option A (Direct File Open):**
-Double-click `client/index.html` in your file explorer.
+**Option A (Recommended):**
+Open `http://localhost:3001` in your browser.
 
-**Option B (VS Code Live Server):**
-If using VS Code, right-click `client/index.html` and select "Open with Live Server".
+**Option B (Alternative):**
+If using VS Code, you can still use Live Server, but make sure the backend is running.
 
 ## 📖 Usage Guide
 
